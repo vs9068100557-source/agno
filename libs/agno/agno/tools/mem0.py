@@ -133,7 +133,7 @@ class Mem0Tools(Toolkit):
         try:
             results = self.client.search(
                 query=query,
-                user_id=resolved_user_id,
+                filters={"user_id": resolved_user_id},
             )
 
             if isinstance(results, dict) and "results" in results:
@@ -160,7 +160,7 @@ class Mem0Tools(Toolkit):
             return resolved_user_id
         try:
             results = self.client.get_all(
-                user_id=resolved_user_id,
+                filters={"user_id": resolved_user_id},
             )
 
             if isinstance(results, dict) and "results" in results:
@@ -187,7 +187,7 @@ class Mem0Tools(Toolkit):
             log_error(error_msg)
             return f"Error deleting all memories: {error_msg}"
         try:
-            self.client.delete_all(user_id=resolved_user_id)
+            self.client.delete_all(filters={"user_id": =resolved_user_id})
             return f"Successfully deleted all memories for user_id: {resolved_user_id}."
         except Exception as e:
             log_error(f"Error deleting all memories: {str(e)}")
